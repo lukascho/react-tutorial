@@ -4,7 +4,6 @@ class WeitereAngaben extends Component {
   render(){
     return (
       <div className="weitere-angaben">
-        WeitereAngaben
       </div>
     )
   }

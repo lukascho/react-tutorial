@@ -6,14 +6,12 @@ import "./FormWizard.css";
 class FormWizard extends Component {
   
   currentStepIndex() {
-    const path = this.props.location.pathname;
-    const step = this.props.steps.find(step => step.path === path);
-    return step !== undefined ? this.props.steps.indexOf(step) : -1;
+    const step = this.props.steps.find(step => step.path === this.props.location.pathname);
+    return this.props.steps.indexOf(step);
   }
 
   nextStep() {
-    const current = this.currentStepIndex();
-    const next = current + 1;
+    const next = this.currentStepIndex() + 1;
     if (next <= this.props.steps.length - 1) {
       this.props.history.push(this.props.steps[next].path);
       this.setState({ active: next });
@@ -23,16 +21,15 @@ class FormWizard extends Component {
   prevStep() {
     const current = this.currentStepIndex();
     if (current > 0) {
-      const next = current - 1;
-      this.props.history.push(this.props.steps[next].path);
-      this.setState({ active: next });
+      this.props.history.push(this.props.steps[current - 1].path);
+      this.setState({ active: current - 1 });
     }
   }
 
   render() {
-    const currentPath = this.currentStepIndex(this.props.location.pathname);
+    const currentStepIndex = this.currentStepIndex(this.props.location.pathname);
 
-    if (currentPath !== -1) {
+    if (currentStepIndex !== -1) {
       return <div className="form-wizard">
         <div className="form-wizard-labels">
           {this.props.steps.map(step => this.renderStepLabel(step))}
