@@ -1,0 +1,13 @@
+.step {
+    display: block;
+}
+
+.step-footer {
+    display: flex;  
+    align-items: stretch;
+    justify-content: space-around;
+}
+
+.step-action:hover {
+    cursor: pointer;
+}
